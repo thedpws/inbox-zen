@@ -27,12 +27,15 @@ func doOnTimer(freqSeconds int, f func()) (stopFunc func()) {
     }
 }	
 
-
 func main() {
-	stop := doOnTimer(2, func(){
+	var stops = []func(){}
+
+	stops = append(stops, doOnTimer(2, func(){
 		fmt.Println("sfasdf")
-	})
+	}))
 
 	time.Sleep(10 * time.Second)
-	stop()
+	for _,stop := range stops {
+		stop()
+	}
 }

@@ -5,6 +5,19 @@ import (
 	"time"
 )
 
+type ZenChannel interface {
+	Open() chan ZenMessage
+	Close()
+}
+
+type ZenMessage interface {
+	Content() string
+	Reply(string)
+}
+
+// type EmailChannel
+
+
 func doOnTimer(freqSeconds int, f func()) (stopFunc func()) {
 
 	t := time.Duration(freqSeconds) * time.Second;
